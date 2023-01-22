@@ -8,6 +8,13 @@ datasource db {
 }
 
 model Workout {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  label String
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  label     String
+  exercises Exercise[]
+}
+
+type Exercise {
+  sets   String
+  reps   String
+  weight String
 }
