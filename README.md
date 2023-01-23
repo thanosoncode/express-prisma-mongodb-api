@@ -1,4 +1,11 @@
 # Track your workouts app
 
 ## Client
-### React
+react
+react-router 6.4
+material ui
+
+## Server
+express
+prisma
+mongodb
