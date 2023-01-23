@@ -1,4 +1,4 @@
-## track your workouts
+## track workouts made easy
 
 ### Client
 react<br/>
