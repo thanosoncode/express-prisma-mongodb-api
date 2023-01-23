@@ -1,11 +1,11 @@
-# Track your workouts app
+## track your workouts
 
-## Client
-react
-react-router 6.4
-material ui
+### Client
+react<br/>
+react-router 6.4<br/>
+material ui<br/>
 
-## Server
-express
-prisma
-mongodb
+### Server
+express<br/>
+prisma<br/>
+mongodb<br/>
