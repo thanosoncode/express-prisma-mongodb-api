@@ -1,0 +1,16 @@
+import { createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    common: {
+      bg: "#121212",
+      menu: "#181818",
+      topGradient: "#404040",
+      bottomGradient: "#282828",
+      primaryText: "#ffffff",
+      secondaryText: "#b3b3b3",
+    },
+  },
+});
+
+export default theme;
