@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import theme from "../theme";
 import Navbar from "./navbar/Navbar.component";
 
-const RoutLayout = () => {
+const RootLayout = () => {
   return (
     <Box
       sx={{
@@ -15,4 +15,4 @@ const RoutLayout = () => {
     </Box>
   );
 };
-export default RoutLayout;
+export default RootLayout;

@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./components/Home";
-import RoutLayout from "./components/RoutLayout";
+import RootLayout from "./components/RootLayout";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
@@ -14,7 +14,7 @@ import { Box } from "@mui/material";
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RoutLayout />}>
+      <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
       </Route>
     )
