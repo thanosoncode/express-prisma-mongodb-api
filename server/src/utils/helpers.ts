@@ -5,7 +5,8 @@ export const workoutIsValid = (label: string, exercises: Exercise[]) => {
     exercises &&
     exercises.length > 0 &&
     exercises.every(
-      (exercise) => exercise.sets && exercise.reps && exercise.weight
+      (exercise) =>
+        exercise.name && exercise.sets && exercise.reps && exercise.weight
     );
   const labelIsValid = label && label.length > 0;
 

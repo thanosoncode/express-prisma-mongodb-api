@@ -1,18 +1,19 @@
-import { Box, Link } from "@mui/material";
+import { Box } from "@mui/material";
 import { useStyles } from "./Navbar.styles";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { classes } = useStyles();
   return (
     <Box className={classes.navbarRoot}>
-      <Link href="/" underline="none" className={classes.link}>
+      <Link to="/" className={classes.link}>
         home
       </Link>
       <Box className={classes.navbarRight}>
-        <Link href="/about" underline="none" className={classes.link}>
+        <Link to="/workouts" className={classes.link}>
           my workouts
         </Link>
-        <Link href="/contact" underline="none" className={classes.link}>
+        <Link to="/add-workout" className={classes.link}>
           add workout
         </Link>
       </Box>

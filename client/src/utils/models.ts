@@ -4,3 +4,9 @@ export interface Exercise {
   reps: string;
   weight: string;
 }
+
+export interface Workout {
+  id: string;
+  label: string;
+  exercises: Exercise[];
+}
