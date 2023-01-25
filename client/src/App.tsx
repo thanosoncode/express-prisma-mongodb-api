@@ -40,8 +40,8 @@ const App = () => {
       <CssBaseline />
       <Box
         style={{
-          background: theme.palette.common.bg,
-          color: theme.palette.common.white,
+          background: "#fafafa",
+          color: "black",
           height: "100vh",
         }}
       >

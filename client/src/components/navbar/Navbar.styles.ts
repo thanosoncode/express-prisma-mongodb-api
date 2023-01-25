@@ -10,7 +10,7 @@ export const useStyles = makeStyles()((theme: Theme) => ({
   },
   link: {
     textDecoration: "none",
-    color: theme.palette.common.white,
+    color: "black",
   },
   navbarRight: {
     display: "flex",
