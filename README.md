@@ -2,7 +2,8 @@
 
 ### Client
 react<br/>
-react-router 6.4<br/>
+react-router<br/>
+react-query<br/>
 material ui<br/>
 
 ### Server
