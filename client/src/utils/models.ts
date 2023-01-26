@@ -6,7 +6,7 @@ export interface Exercise {
 }
 
 export interface Workout {
-  id: string;
+  id?: string;
   label: string;
   exercises: Exercise[];
 }

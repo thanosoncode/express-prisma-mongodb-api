@@ -17,6 +17,7 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
   const emptyExercise = { name: "", sets: "0", reps: "0", weight: "" };
 
   const [exercise, setExercise] = useState<Exercise>(emptyExercise);
+  const [inValidExercise, setInvalidExercise] = useState(false);
 
   const handleSelectChange = (event: SelectChangeEvent) => {
     setExercise({
@@ -35,67 +36,81 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
   };
 
   const handleAddExercise = () => {
+    const exerciseIsValid =
+      exercise.sets !== "0" &&
+      exercise.reps !== "0" &&
+      exercise.name !== "" &&
+      exercise.weight !== "";
+    if (!exerciseIsValid) {
+      setInvalidExercise(true);
+      return;
+    }
+
     props.setExercises([...props.exercises, exercise]);
     setExercise(emptyExercise);
+    setInvalidExercise(false);
   };
 
   return (
-    <Box>
-      <FormControl>
-        <InputLabel id="sets">sets</InputLabel>
-        <Select
-          id="sets"
-          name="sets"
-          label="sets"
-          labelId="sets"
-          value={exercise?.sets}
-          onChange={handleSelectChange}
-        >
-          {new Array(11).fill(null).map((_, index) => (
-            <MenuItem key={index} value={index}>
-              {index}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <InputLabel id="reps">reps</InputLabel>
-        <Select
-          id="reps"
-          name="reps"
-          label="reps"
-          labelId="reps"
-          value={exercise?.reps}
-          onChange={handleSelectChange}
-        >
-          {new Array(21).fill(null).map((_, index) => (
-            <MenuItem key={index} value={index}>
-              {index}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        id="weight"
-        name="weight"
-        label="weight"
-        variant="outlined"
-        type="number"
-        value={exercise.weight}
-        onChange={handleInputChange}
-      />
-      <TextField
-        id="name"
-        name="name"
-        label="name"
-        variant="outlined"
-        value={exercise.name}
-        onChange={handleInputChange}
-      />
-      <Button variant="outlined" onClick={handleAddExercise}>
-        add
-      </Button>
-    </Box>
+    <>
+      {inValidExercise ? "all fields are required" : ""}
+      <Box>
+        <FormControl>
+          <InputLabel id="sets">sets</InputLabel>
+          <Select
+            id="sets"
+            name="sets"
+            label="sets"
+            labelId="sets"
+            value={exercise?.sets}
+            onChange={handleSelectChange}
+          >
+            {new Array(11).fill(null).map((_, index) => (
+              <MenuItem key={index} value={index.toString()}>
+                {index.toString()}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel id="reps">reps</InputLabel>
+          <Select
+            id="reps"
+            name="reps"
+            label="reps"
+            labelId="reps"
+            value={exercise?.reps}
+            onChange={handleSelectChange}
+          >
+            {new Array(21).fill(null).map((_, index) => (
+              <MenuItem key={index} value={index.toString()}>
+                {index.toString()}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <TextField
+          id="weight"
+          name="weight"
+          label="weight"
+          variant="outlined"
+          type="number"
+          value={exercise.weight}
+          onChange={handleInputChange}
+        />
+        <TextField
+          id="name"
+          name="name"
+          label="name"
+          variant="outlined"
+          value={exercise.name}
+          onChange={handleInputChange}
+        />
+        <Button variant="outlined" onClick={handleAddExercise}>
+          add
+        </Button>
+      </Box>
+    </>
   );
 };
 export default AddExercise;
