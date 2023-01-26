@@ -8,7 +8,12 @@ import { Exercise } from "../utils/models";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const AddExercise = () => {
+interface AddExerciseProps {
+  exercises: Exercise[];
+  setExercises: React.Dispatch<React.SetStateAction<Exercise[]>>;
+}
+
+const AddExercise: React.FC<AddExerciseProps> = (props) => {
   const emptyExercise = { name: "", sets: "0", reps: "0", weight: "" };
 
   const [exercise, setExercise] = useState<Exercise>(emptyExercise);
@@ -30,7 +35,7 @@ const AddExercise = () => {
   };
 
   const handleAddExercise = () => {
-    console.log(exercise);
+    props.setExercises([...props.exercises, exercise]);
     setExercise(emptyExercise);
   };
 

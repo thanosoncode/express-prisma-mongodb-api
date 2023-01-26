@@ -13,9 +13,11 @@ import { Box } from "@mui/material";
 import Workouts from "./pages/Workouts";
 import AddWorkout from "./pages/AddWorkout";
 import Error from "./components/Error";
-import { loader as workoutsLoader } from "./pages/Workouts";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App = () => {
+  const queryClient = new QueryClient();
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />} errorElement={<Error />}>
@@ -23,7 +25,6 @@ const App = () => {
         <Route
           path="/workouts"
           element={<Workouts />}
-          loader={workoutsLoader}
           errorElement={<Error />}
         />
         <Route
@@ -36,18 +37,20 @@ const App = () => {
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box
-        style={{
-          background: "#fafafa",
-          color: "black",
-          height: "100vh",
-        }}
-      >
-        <RouterProvider router={router} />
-      </Box>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box
+          style={{
+            background: "#fafafa",
+            color: "black",
+            height: "100vh",
+          }}
+        >
+          <RouterProvider router={router} />
+        </Box>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 export default App;

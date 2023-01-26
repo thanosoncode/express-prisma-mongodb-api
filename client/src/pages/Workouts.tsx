@@ -1,9 +1,13 @@
-import { useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getWorkouts } from "../api/workouts";
+import { LONG_CACHE } from "../utils/constants";
 import { Workout } from "../utils/models";
 
 const Workouts = () => {
-  const workouts: any = useLoaderData();
-  console.log(workouts);
+  const { data: workouts } = useQuery(["workouts"], getWorkouts, {
+    refetchOnWindowFocus: false,
+    staleTime: LONG_CACHE,
+  });
 
   return (
     <div>
@@ -32,9 +36,3 @@ const Workouts = () => {
   );
 };
 export default Workouts;
-
-export const loader = async () => {
-  const response = await fetch("http://localhost:4444/api/workouts");
-  const data = await response.json();
-  return data;
-};
