@@ -1,40 +1,31 @@
-import { Button } from "@mui/material";
+import { Box, Button, SelectChangeEvent, Typography } from "@mui/material";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postWorkout } from "../api/workouts";
 import AddExercise from "../components/AddExercise";
 import AddLabel from "../components/AddLabel";
+import Controls from "../components/Controls";
+import ExercisesList from "../components/ExercisesList";
 import PageTitle from "../components/PageTitle";
 import { Exercise } from "../utils/models";
 
 const AddWorkout = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [doneWithExercises, setDoneWithExercises] = useState(false);
   const [label, setLabel] = useState("");
   const [labelAdded, setLabelAdded] = useState(false);
   const workoutIsReady = labelAdded && exercises.length > 0;
 
-  const showExercises = exercises
-    ? exercises.map((ex, index) => (
-        <div key={index}>
-          <span>name: {ex.name}</span>
-          <span>sets: {ex.sets}</span>
-          <span>reps: {ex.reps}</span>
-          <span>weight: {ex.weight}</span>
-        </div>
-      ))
-    : null;
-
   const handleLabelAdded = () => setLabelAdded(true);
 
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setLabel(event.target.value);
   };
 
-  const { mutate, isLoading } = useMutation(
+  const { mutate, isLoading: isSavingWorkout } = useMutation(
     ["post-workout"],
     () => postWorkout({ label, exercises }),
     {
@@ -45,42 +36,46 @@ const AddWorkout = () => {
     }
   );
 
-  const handleGoBack = () => setDoneWithExercises(false);
+  const handleGoBack = () => {
+    if (label) {
+      setLabel("");
+      setLabelAdded(false);
+      return;
+    }
+    setDoneWithExercises(false);
+  };
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <PageTitle title="add workout" />
-      {showExercises}
+      <ExercisesList exercises={exercises} />
+      {labelAdded ? (
+        <Typography sx={{ marginTop: 4 }} variant="h5">
+          {label}
+        </Typography>
+      ) : null}
       {doneWithExercises ? (
         <AddLabel
           label={label}
+          labelAdded={labelAdded}
           onChange={handleChange}
           onAdd={handleLabelAdded}
           onGoBack={handleGoBack}
         />
-      ) : null}
-      {doneWithExercises ? null : (
-        <>
-          <AddExercise exercises={exercises} setExercises={setExercises} />
-          <Button
-            variant="contained"
-            disabled={exercises.length === 0}
-            onClick={() => setDoneWithExercises(true)}
-          >
-            done with exercises
-          </Button>
-        </>
+      ) : (
+        <AddExercise exercises={exercises} setExercises={setExercises} />
       )}
-      {workoutIsReady ? (
-        <Button
-          variant="contained"
-          disabled={isLoading}
-          onClick={() => mutate()}
-        >
-          save workout
-        </Button>
-      ) : null}
-    </>
+
+      <Controls
+        doneWithExercises={doneWithExercises}
+        workoutIsReady={workoutIsReady}
+        isSavingWorkout={isSavingWorkout}
+        setDoneWithExercises={setDoneWithExercises}
+        exercises={exercises}
+        handleGoBack={handleGoBack}
+        mutate={mutate}
+      />
+    </Box>
   );
 };
 export default AddWorkout;

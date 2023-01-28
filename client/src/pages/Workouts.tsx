@@ -11,7 +11,7 @@ import { useState } from "react";
 const Workouts = () => {
   const queryClient = useQueryClient();
 
-  const { data: workouts } = useQuery(["workouts"], getWorkouts, {
+  const { data: workouts, isLoading } = useQuery(["workouts"], getWorkouts, {
     refetchOnWindowFocus: false,
     staleTime: LONG_CACHE,
   });
@@ -28,6 +28,7 @@ const Workouts = () => {
   return (
     <div>
       <h4>MyWorkouts</h4>
+      {isLoading ? <CircularProgress /> : null}
       {workouts
         ? workouts.map((workout: Workout) => {
             const {

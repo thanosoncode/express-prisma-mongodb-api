@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Exercise } from "../utils/models";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import theme from "../theme";
 
 interface AddExerciseProps {
   exercises: Exercise[];
@@ -51,10 +52,40 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
     setInvalidExercise(false);
   };
 
+  const possibleExercises = [
+    "overhead shoulder press",
+    "bulgarian split squats",
+    "incline bench",
+    "dumbell shoulder press",
+    "trap deadlift",
+    "lateral raises",
+    "tricep extensions",
+  ];
+
   return (
     <>
       {inValidExercise ? "all fields are required" : ""}
-      <Box>
+      <Box sx={{ display: "flex", gap: 4, marginTop: 8, marginBottom: 6 }}>
+        <FormControl sx={{ minWidth: 200 }}>
+          <InputLabel id="name" sx={{ width: 200 }}>
+            exercise
+          </InputLabel>
+          <Select
+            id="name"
+            name="name"
+            label="name"
+            labelId="name"
+            value={exercise.name}
+            onChange={handleSelectChange}
+            autoWidth
+          >
+            {possibleExercises.map((ex) => (
+              <MenuItem key={ex} value={ex}>
+                {ex}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <FormControl>
           <InputLabel id="sets">sets</InputLabel>
           <Select
@@ -96,14 +127,6 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
           variant="outlined"
           type="number"
           value={exercise.weight}
-          onChange={handleInputChange}
-        />
-        <TextField
-          id="name"
-          name="name"
-          label="name"
-          variant="outlined"
-          value={exercise.name}
           onChange={handleInputChange}
         />
         <Button variant="outlined" onClick={handleAddExercise}>
