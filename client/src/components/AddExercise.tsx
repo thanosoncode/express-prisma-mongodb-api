@@ -65,7 +65,7 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
   return (
     <>
       {inValidExercise ? "all fields are required" : ""}
-      <Box sx={{ display: "flex", gap: 4, marginTop: 8, marginBottom: 6 }}>
+      <Box sx={{ display: "flex", gap: 4, marginTop: 2, marginBottom: 3 }}>
         <FormControl sx={{ minWidth: 200 }}>
           <InputLabel id="name" sx={{ width: 200 }}>
             exercise

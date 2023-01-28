@@ -1,4 +1,4 @@
-import { Box, Button, SelectChangeEvent, Typography } from "@mui/material";
+import { Box, SelectChangeEvent, Typography } from "@mui/material";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,6 @@ import AddExercise from "../components/AddExercise";
 import AddLabel from "../components/AddLabel";
 import Controls from "../components/Controls";
 import ExercisesList from "../components/ExercisesList";
-import PageTitle from "../components/PageTitle";
 import { Exercise } from "../utils/models";
 
 const AddWorkout = () => {
@@ -47,7 +46,9 @@ const AddWorkout = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <PageTitle title="add workout" />
+      <Typography variant="h6" sx={{ marginTop: 2 }}>
+        Add workout
+      </Typography>
       <ExercisesList exercises={exercises} />
       {labelAdded ? (
         <Typography sx={{ marginTop: 4 }} variant="h5">

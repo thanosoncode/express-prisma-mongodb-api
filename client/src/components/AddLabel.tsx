@@ -5,6 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { workoutLabels } from "../utils/constants";
 
 interface AddLabelProps {
   label: string;
@@ -15,19 +16,6 @@ interface AddLabelProps {
 }
 
 const AddLabel: React.FC<AddLabelProps> = (props) => {
-  const labels = [
-    "push",
-    "pull",
-    "upper body",
-    "lower body",
-    "legs",
-    "legs anterior focus",
-    "legs posterior focus",
-    "shoulders",
-    "calisthenics",
-    "other",
-  ];
-
   return (
     <Box sx={{ marginTop: 4, marginBottom: 4 }}>
       <Box sx={{ display: "flex", gap: 4 }}>
@@ -43,7 +31,7 @@ const AddLabel: React.FC<AddLabelProps> = (props) => {
                 value={props.label}
                 onChange={props.onChange}
               >
-                {labels.map((label) => (
+                {workoutLabels.map((label) => (
                   <MenuItem key={label} value={label}>
                     {label}
                   </MenuItem>

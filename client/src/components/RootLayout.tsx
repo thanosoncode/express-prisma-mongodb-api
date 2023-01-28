@@ -7,7 +7,7 @@ const RootLayout = () => {
   return (
     <Box
       sx={{
-        padding: theme.spacing(0, 12),
+        padding: theme.spacing(0, 12, 4, 12),
       }}
     >
       <Navbar />

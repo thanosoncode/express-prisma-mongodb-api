@@ -1,21 +1,41 @@
 import { Box } from "@mui/material";
 import { useStyles } from "./Navbar.styles";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
+  const { pathname } = useLocation();
+
   return (
     <Box className={classes.navbarRoot}>
-      <Link to="/" className={classes.link}>
+      <NavLink
+        to="/"
+        className={cx({
+          [classes.link]: true,
+          [classes.active]: pathname === "/",
+        })}
+      >
         home
-      </Link>
+      </NavLink>
       <Box className={classes.navbarRight}>
-        <Link to="/workouts" className={classes.link}>
+        <NavLink
+          to="/workouts"
+          className={cx({
+            [classes.link]: true,
+            [classes.active]: pathname === "/workouts",
+          })}
+        >
           my workouts
-        </Link>
-        <Link to="/add-workout" className={classes.link}>
+        </NavLink>
+        <NavLink
+          to="/add-workout"
+          className={cx({
+            [classes.link]: true,
+            [classes.active]: pathname === "/add-workout",
+          })}
+        >
           add workout
-        </Link>
+        </NavLink>
       </Box>
     </Box>
   );

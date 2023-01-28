@@ -44,7 +44,9 @@ const App = () => {
           style={{
             background: "#fafafa",
             color: "black",
-            height: "100vh",
+            minHeight: "100vh",
+            overflowX: "hidden",
+            marginRight: "calc(-1 * (100vw - 100%))",
           }}
         >
           <RouterProvider router={router} />
