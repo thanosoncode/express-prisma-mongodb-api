@@ -36,6 +36,15 @@ const Navbar = () => {
         >
           add workout
         </NavLink>
+        <NavLink
+          to="/charts"
+          className={cx({
+            [classes.link]: true,
+            [classes.active]: pathname === "/charts",
+          })}
+        >
+          charts
+        </NavLink>
       </Box>
     </Box>
   );

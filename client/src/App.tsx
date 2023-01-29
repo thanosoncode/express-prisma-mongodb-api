@@ -12,6 +12,7 @@ import theme from "./theme";
 import { Box } from "@mui/material";
 import Workouts from "./pages/Workouts";
 import AddWorkout from "./pages/AddWorkout";
+import Charts from "./pages/Charts";
 import Error from "./components/Error";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -32,6 +33,7 @@ const App = () => {
           element={<AddWorkout />}
           errorElement={<Error />}
         />
+        <Route path="/charts" element={<Charts />} errorElement={<Error />} />
       </Route>
     )
   );
