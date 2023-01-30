@@ -52,7 +52,7 @@ const AddWorkout = () => {
       <ExercisesList exercises={exercises} />
       {labelAdded ? (
         <Typography sx={{ marginTop: 4 }} variant="h5">
-          {label}
+          {label.toUpperCase()}
         </Typography>
       ) : null}
       {doneWithExercises ? (

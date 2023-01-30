@@ -8,6 +8,8 @@ import { Exercise } from "../utils/models";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import theme from "../theme";
+import SelectByExercise from "./SelectByExercise";
+import { Typography } from "@mui/material";
 
 interface AddExerciseProps {
   exercises: Exercise[];
@@ -52,40 +54,16 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
     setInvalidExercise(false);
   };
 
-  const possibleExercises = [
-    "overhead shoulder press",
-    "bulgarian split squats",
-    "incline bench",
-    "dumbell shoulder press",
-    "trap deadlift",
-    "lateral raises",
-    "tricep extensions",
-  ];
-
   return (
     <>
-      {inValidExercise ? "all fields are required" : ""}
+      <Typography
+        variant="h6"
+        sx={{ marginTop: 4, color: theme.palette.warning.main }}
+      >
+        {inValidExercise ? "All fields are required" : ""}
+      </Typography>
       <Box sx={{ display: "flex", gap: 4, marginTop: 2, marginBottom: 3 }}>
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel id="name" sx={{ width: 200 }}>
-            exercise
-          </InputLabel>
-          <Select
-            id="name"
-            name="name"
-            label="name"
-            labelId="name"
-            value={exercise.name}
-            onChange={handleSelectChange}
-            autoWidth
-          >
-            {possibleExercises.map((ex) => (
-              <MenuItem key={ex} value={ex}>
-                {ex}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <SelectByExercise value={exercise.name} onChange={handleSelectChange} />
         <FormControl>
           <InputLabel id="sets">sets</InputLabel>
           <Select

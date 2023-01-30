@@ -1,20 +1,21 @@
+import { Box, SelectChangeEvent } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { format } from "date-fns";
+import { useState } from "react";
 import { getWorkouts } from "../api/workouts";
-import theme from "../theme";
+import BarChart from "../components/charts/BarChart";
+import LineChart from "../components/charts/LineChart";
+import SelectByExercise from "../components/SelectByExercise";
 import { LONG_CACHE } from "../utils/constants";
-import { Exercise, ExerciseWithVolumeAndDate } from "../utils/models";
+import { Exercise } from "../utils/models";
 
 const Charts = () => {
+  const [selectedExercise, setSelectedExercise] = useState("");
+
+  const handleSelectChange = (event: SelectChangeEvent) =>
+    setSelectedExercise(event.target.value);
+
   const { data: workouts } = useQuery(["workouts"], getWorkouts, {
     staleTime: LONG_CACHE,
     refetchOnWindowFocus: false,
@@ -35,69 +36,60 @@ const Charts = () => {
       : [];
   };
 
-  const allPushPresses = getRecordsPerExercise("push press");
+  const allRecordsPerExercise = getRecordsPerExercise(selectedExercise);
   const calculateVolume = (exercise: Exercise) =>
     Number(exercise.sets) * Number(exercise.reps) * Number(exercise.weight);
 
-  const volumePerExercise = allPushPresses.map((ex) => ({
+  const volumePerExercise = allRecordsPerExercise.map((ex) => {
+    return {
+      name: ex.name,
+      volume: calculateVolume(ex),
+      sets: ex.sets,
+      reps: ex.reps,
+      weight: ex.weight,
+      createdAt: ex.createdAt
+        ? format(new Date(ex.createdAt).getTime(), "dd/MM")
+        : "",
+    };
+  });
+
+  const topWeigtPerExercise = allRecordsPerExercise.map((ex) => ({
     name: ex.name,
-    volume: calculateVolume(ex),
-    sets: ex.sets,
-    reps: ex.reps,
-    weight: ex.weight,
-    createdAt:
-      new Date(ex.createdAt).getDate().toString() +
-      "/" +
-      (new Date(ex.createdAt).getMonth() + 1).toString(),
+    topWeight: ex.weight,
+    createdAt: ex.createdAt
+      ? format(new Date(ex.createdAt).getTime(), "dd/MM")
+      : "",
   }));
+
+  const options = Array.from(
+    new Set(
+      (workouts ? workouts.flatMap((w) => w.exercises) : []).map(
+        (ex) => ex.name
+      )
+    )
+  );
 
   return (
     <div>
       <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2 }}>
         Charts
       </Typography>
-      <BarChart width={640} height={360} data={volumePerExercise}>
-        <Bar
-          dataKey="volume"
-          fill={theme.palette.primary.main}
-          barSize={20}
-          background={false}
-          isAnimationActive={false}
-        ></Bar>
-        <Tooltip
-          content={<CustomTooltip />}
-          payload={volumePerExercise}
-          cursor={{ fill: "none" }}
+      <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
+        Volume per exercise
+      </Typography>
+      <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
+        <Typography variant="subtitle2" sx={{ marginBottom: 2 }}>
+          Select exercise
+        </Typography>
+        <SelectByExercise
+          value={selectedExercise}
+          onChange={handleSelectChange}
+          options={options}
         />
-        <Legend />
-        {/* <CartesianGrid strokeDasharray="3 3" /> */}
-        <YAxis dataKey="volume" />
-        <XAxis dataKey="createdAt" />
-      </BarChart>
+      </Box>
+      <BarChart data={volumePerExercise} />
+      <LineChart data={topWeigtPerExercise} />
     </div>
   );
 };
 export default Charts;
-
-const CustomTooltip = ({
-  active,
-  payload,
-}: {
-  payload?: any;
-  active?: boolean;
-}) => {
-  if (active && payload) {
-    console.log(payload[0].payload.sets);
-    return (
-      <div>
-        {payload[0].payload.sets}
-        {"*"}
-        {payload[0].payload.reps}
-        {"*"}
-        {payload[0].payload.weight}
-      </div>
-    );
-  }
-
-  return null;
-};

@@ -10,13 +10,11 @@ export const getWorkouts = async (): Promise<Workout[] | undefined> => {
 export const postWorkout = async (workout: Workout) => {
   const response = await axios.post("/workouts", workout);
   const data = await response.data;
-  console.log(data);
   return data;
 };
 
 export const deleteWorkout = async (id: string) => {
   const response = await axios.delete(`/workouts/${id}`);
   const data = await response.data;
-  console.log(data);
   return data;
 };

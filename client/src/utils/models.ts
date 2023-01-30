@@ -8,8 +8,8 @@ export interface Exercise {
 export interface Workout {
   id?: string;
   label: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   exercises: Exercise[];
 }
 
