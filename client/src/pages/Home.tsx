@@ -1,4 +1,10 @@
+import Calendar from "../components/Calendar";
+
 const Home = () => {
-  return <div>this is home</div>;
+  return (
+    <div>
+      <Calendar />
+    </div>
+  );
 };
 export default Home;

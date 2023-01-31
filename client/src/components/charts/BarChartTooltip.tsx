@@ -27,12 +27,12 @@ const BarTooltip = ({
           }}
         >
           <Typography variant="h6">
-            {payload[0].payload.sets}
+            {payload[0].payload.sets} sets
             {" x "}
-            {payload[0].payload.reps}
+            {payload[0].payload.reps} reps
           </Typography>
           <Typography sx={{ color: theme.palette.primary.main }}>
-            {payload[0].payload.weight} kg
+            &#64; {payload[0].payload.weight} kg
           </Typography>
         </Box>
       </Box>

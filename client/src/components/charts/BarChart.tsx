@@ -1,3 +1,5 @@
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
 import {
   Bar,
   BarChart as ReChartsBarChart,
@@ -26,10 +28,21 @@ const BarChart: React.FC<BarChartsProps> = ({ data }) => {
         payload={data}
         cursor={{ fill: "none" }}
       />
-      <Legend />
+      <Legend content={<CustomLegend />} />
       <YAxis dataKey="volume" />
       <XAxis dataKey="createdAt" />
     </ReChartsBarChart>
   );
 };
 export default BarChart;
+
+const CustomLegend = () => {
+  return (
+    <Typography
+      variant="subtitle2"
+      sx={{ textAlign: "center", color: theme.palette.info.main }}
+    >
+      Amount of volume &#40;sets x reps x weight&#41;
+    </Typography>
+  );
+};

@@ -11,7 +11,9 @@ import { LONG_CACHE } from "../utils/constants";
 import { Exercise } from "../utils/models";
 
 const Charts = () => {
-  const [selectedExercise, setSelectedExercise] = useState("");
+  const [selectedExercise, setSelectedExercise] = useState(
+    "bulgarian split squats"
+  );
 
   const handleSelectChange = (event: SelectChangeEvent) =>
     setSelectedExercise(event.target.value);
@@ -70,13 +72,11 @@ const Charts = () => {
   );
 
   return (
-    <div>
+    <Box>
       <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2 }}>
         Charts
       </Typography>
-      <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
-        Volume per exercise
-      </Typography>
+
       <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
         <Typography variant="subtitle2" sx={{ marginBottom: 2 }}>
           Select exercise
@@ -87,9 +87,29 @@ const Charts = () => {
           options={options}
         />
       </Box>
-      <BarChart data={volumePerExercise} />
-      <LineChart data={topWeigtPerExercise} />
-    </div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: 4,
+        }}
+      >
+        <Box>
+          <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
+            Volume per exercise
+          </Typography>
+          <BarChart data={volumePerExercise} />
+        </Box>
+        <Box>
+          <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
+            Top weight
+          </Typography>
+          <LineChart data={topWeigtPerExercise} />
+        </Box>
+      </Box>
+    </Box>
   );
 };
 export default Charts;

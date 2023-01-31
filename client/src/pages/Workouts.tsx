@@ -9,6 +9,7 @@ import Backdrop from "@mui/material/Backdrop";
 import ExercisesList from "../components/ExercisesList";
 import { useState } from "react";
 import FIlterBy from "../components/FIlterBy";
+import PieChart from "../components/charts/PieChart";
 
 const Workouts = () => {
   const queryClient = useQueryClient();
@@ -41,6 +42,8 @@ const Workouts = () => {
     ? workouts && workouts.filter((w) => w.label === selectedLabel)
     : workouts;
 
+  console.log("filteredWeorkouts", filteredWorkouts);
+
   return (
     <Box>
       <Box sx={{ display: "flex", gap: 2 }}>
@@ -60,16 +63,24 @@ const Workouts = () => {
           ? filteredWorkouts.map((workout: Workout) => {
               const { id, label, exercises } = workout;
               return (
-                <Box key={id}>
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
+                <Box key={id} sx={{ maxWidth: 800 }}>
+                  <Box sx={{ display: "flex" }}>
                     <Typography>{label}</Typography>
                     <IconButton onClick={() => (id ? mutate(id) : null)}>
                       <DeleteForever />
                     </IconButton>
                   </Box>
-                  <ExercisesList exercises={exercises}></ExercisesList>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: 12,
+                    }}
+                  >
+                    <ExercisesList exercises={exercises}></ExercisesList>
+                    <PieChart data={workout.exercises} />
+                  </Box>
                 </Box>
               );
             })

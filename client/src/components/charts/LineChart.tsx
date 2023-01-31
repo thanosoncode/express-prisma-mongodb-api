@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import {
   Bar,
   LineChart as ReChartsLineChart,
@@ -9,7 +10,6 @@ import {
   CartesianGrid,
 } from "recharts";
 import theme from "../../theme";
-import BarTooltip from "./BarChartTooltip";
 import LineChartTooltip from "./LineChartTooltip";
 
 interface BarChartsProps {
@@ -30,10 +30,21 @@ const LineChart: React.FC<BarChartsProps> = ({ data }) => {
         payload={data}
         cursor={{ fill: "none" }}
       />
-      <Legend />
+      <Legend content={<CustomLegend />} />
       <YAxis dataKey="topWeight" />
       <XAxis dataKey="createdAt" />
     </ReChartsLineChart>
   );
 };
 export default LineChart;
+
+const CustomLegend = () => {
+  return (
+    <Typography
+      variant="subtitle2"
+      sx={{ textAlign: "center", color: theme.palette.info.main }}
+    >
+      Top weight used in set.
+    </Typography>
+  );
+};
