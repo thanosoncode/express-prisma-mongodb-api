@@ -10,9 +10,14 @@ import { useStyles } from "./DaysView.styles";
 interface DaysViewProps {
   year: number;
   month: number;
+  setSelectedWorkoutId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const DaysView: React.FC<DaysViewProps> = ({ year, month }) => {
+const DaysView: React.FC<DaysViewProps> = ({
+  year,
+  month,
+  setSelectedWorkoutId,
+}) => {
   const { classes, cx } = useStyles();
 
   const getDaysInMonth = (year: number, month: number) => {
@@ -26,6 +31,10 @@ const DaysView: React.FC<DaysViewProps> = ({ year, month }) => {
     refetchOnWindowFocus: false,
     staleTime: LONG_CACHE,
   });
+
+  const handleDayClick = (id: string) => {
+    setSelectedWorkoutId(id);
+  };
 
   useEffect(() => {
     if (workouts) {
@@ -100,6 +109,7 @@ const DaysView: React.FC<DaysViewProps> = ({ year, month }) => {
       {days.map((day, index) => (
         <Box
           key={index + 1}
+          onClick={() => handleDayClick(day.id)}
           className={cx({
             [classes.day]: true,
             [classes.dayActive]: day.day.toString().length > 0,

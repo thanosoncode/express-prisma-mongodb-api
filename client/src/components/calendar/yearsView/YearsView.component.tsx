@@ -14,7 +14,6 @@ const YearsView: React.FC<YearsViewProps> = ({ year, handleYearClick }) => {
     for (let i = start; i <= end; i++) {
       array.push(i);
     }
-    console.log(array);
     return array;
   };
 

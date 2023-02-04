@@ -44,8 +44,7 @@ const PieChart: React.FC<PieChartsProps> = ({ data }) => {
         }
       >
         {exercises.map((entry, index) => {
-          console.log(entry.amount);
-          return <Cell fill={COLORS[index % COLORS.length]}></Cell>;
+          return <Cell key={index} fill={COLORS[index % COLORS.length]}></Cell>;
         })}
       </Pie>
       <Tooltip />

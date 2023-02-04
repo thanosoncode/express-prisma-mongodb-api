@@ -18,3 +18,12 @@ export const deleteWorkout = async (id: string) => {
   const data = await response.data;
   return data;
 };
+
+export const getSingleWorkout = async (id: string): Promise<Workout | null> => {
+  if (id) {
+    const response = await axios.get(`/workouts/${id}`);
+    const data = await response.data;
+    return data;
+  }
+  return null;
+};

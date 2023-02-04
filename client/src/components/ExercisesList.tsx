@@ -15,7 +15,7 @@ const ExercisesList: React.FC<ExercisesListProps> = (props) => {
   return (
     <>
       {props.exercises && props.exercises.length > 0 ? (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ height: "min-content" }}>
           <Table size="small">
             <TableHead>
               <TableRow>

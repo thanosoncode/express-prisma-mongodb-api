@@ -42,8 +42,6 @@ const Workouts = () => {
     ? workouts && workouts.filter((w) => w.label === selectedLabel)
     : workouts;
 
-  console.log("filteredWeorkouts", filteredWorkouts);
-
   return (
     <Box>
       <Box sx={{ display: "flex", gap: 2 }}>

@@ -74,7 +74,7 @@ const Charts = () => {
   return (
     <Box>
       <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2 }}>
-        Charts
+        Check out how a specific exercise has progressed.
       </Typography>
 
       <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>

@@ -5,10 +5,14 @@ import { useStyles } from "./Calendar.styles";
 import DaysView from "./daysView/DaysView.component";
 import YearsView from "./yearsView/YearsView.component";
 
-const Calendar = () => {
-  const { classes, cx } = useStyles();
-  const [month, setMonth] = useState<number>(1);
-  const [year, setYear] = useState(2023);
+interface CalendarProps {
+  setSelectedWorkoutId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Calendar: React.FC<CalendarProps> = ({ setSelectedWorkoutId }) => {
+  const { classes } = useStyles();
+  const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
+  const [year, setYear] = useState(new Date().getFullYear());
   const [isYearsOpen, setYearsOpen] = useState(false);
 
   const getMonthName = (month: number) => {
@@ -90,7 +94,11 @@ const Calendar = () => {
       {isYearsOpen ? (
         <YearsView year={year} handleYearClick={handleYearClick} />
       ) : (
-        <DaysView month={month} year={year} />
+        <DaysView
+          month={month}
+          year={year}
+          setSelectedWorkoutId={setSelectedWorkoutId}
+        />
       )}
     </Paper>
   );
