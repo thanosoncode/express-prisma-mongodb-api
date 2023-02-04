@@ -7,7 +7,7 @@ import YearsView from "./yearsView/YearsView.component";
 
 const Calendar = () => {
   const { classes, cx } = useStyles();
-  const [month, setMonth] = useState<number>(2);
+  const [month, setMonth] = useState<number>(1);
   const [year, setYear] = useState(2023);
   const [isYearsOpen, setYearsOpen] = useState(false);
 

@@ -1,4 +1,10 @@
+import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
+import { getWorkouts } from "../../../api/workouts";
+import { LONG_CACHE } from "../../../utils/constants";
 import { useStyles } from "./DaysView.styles";
 
 interface DaysViewProps {
@@ -7,11 +13,48 @@ interface DaysViewProps {
 }
 
 const DaysView: React.FC<DaysViewProps> = ({ year, month }) => {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
 
   const getDaysInMonth = (year: number, month: number) => {
     return new Date(year, month, 0).getDate();
   };
+  const [days, setDays] = useState<{ id: string; day: string; label: "" }[]>(
+    new Array(getDaysInMonth(year, month)).fill({ id: "", day: "", label: "" })
+  );
+
+  const { data: workouts, isLoading } = useQuery(["workouts"], getWorkouts, {
+    refetchOnWindowFocus: false,
+    staleTime: LONG_CACHE,
+  });
+
+  useEffect(() => {
+    if (workouts) {
+      const newDays = new Array(getDaysInMonth(year, month)).fill({
+        id: "",
+        day: "",
+      });
+      const entries = workouts
+        .map((w) => {
+          if (!w.createdAt) return;
+          const date = format(new Date(w.createdAt).getTime(), "dd/MM/yyyy");
+          const [day, month, year] = date.split("/");
+          const entry = {
+            id: w.id ?? "",
+            day: Number(day),
+            month: Number(month),
+            year: Number(year),
+            label: w.label,
+          };
+          return entry;
+        })
+        .filter((item) => item && item.month === month && item.year === year);
+      entries.forEach((entry) => {
+        if (!entry) return;
+        newDays.splice(entry.day - 1, 1, entry);
+      });
+      setDays(newDays);
+    }
+  }, [workouts, month, year]);
 
   const getWhatDayIsTheFirst = (year: number, month: number) => {
     return new Date(year, month - 1, 1).toString().split(" ")[0];
@@ -38,6 +81,8 @@ const DaysView: React.FC<DaysViewProps> = ({ year, month }) => {
     }
   };
 
+  if (isLoading) return <CircularProgress />;
+
   return (
     <Box className={classes.days}>
       <span>S</span>
@@ -52,10 +97,17 @@ const DaysView: React.FC<DaysViewProps> = ({ year, month }) => {
         .map((_, index) => (
           <span key={index}></span>
         ))}
-      {new Array(getDaysInMonth(year, month)).fill(null).map((_, index) => (
-        <span key={index + 1} className={classes.day}>
-          {index + 1}
-        </span>
+      {days.map((day, index) => (
+        <Box
+          key={index + 1}
+          className={cx({
+            [classes.day]: true,
+            [classes.dayActive]: day.day.toString().length > 0,
+          })}
+        >
+          <span> {index + 1}</span>
+          <span className={classes.label}>{day.label}</span>
+        </Box>
       ))}
     </Box>
   );

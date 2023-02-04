@@ -3,7 +3,7 @@ import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()((theme: Theme) => ({
   container: {
-    height: "350px",
+    height: "360px",
     width: "360px",
     overflow: "hidden",
     padding: "5px",

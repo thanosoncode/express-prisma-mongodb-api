@@ -15,6 +15,7 @@ import AddWorkout from "./pages/AddWorkout";
 import Charts from "./pages/Charts";
 import Error from "./components/Error";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -54,6 +55,7 @@ const App = () => {
           <RouterProvider router={router} />
         </Box>
       </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
     </QueryClientProvider>
   );
 };
