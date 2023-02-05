@@ -20,18 +20,26 @@ const ExercisesList: React.FC<ExercisesListProps> = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 800 }}>name</TableCell>
-                <TableCell sx={{ fontWeight: 800 }}>sets</TableCell>
-                <TableCell sx={{ fontWeight: 800 }}>reps</TableCell>
-                <TableCell sx={{ fontWeight: 800 }}>weight</TableCell>
+                <TableCell sx={{ fontWeight: 800, textAlign: "center" }}>
+                  sets
+                </TableCell>
+                <TableCell sx={{ fontWeight: 800, textAlign: "center" }}>
+                  reps
+                </TableCell>
+                <TableCell sx={{ fontWeight: 800, textAlign: "center" }}>
+                  weight
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {props.exercises.map((ex, index) => (
                 <TableRow key={index}>
                   <TableCell>{ex.name}</TableCell>
-                  <TableCell>{ex.sets}</TableCell>
-                  <TableCell>{ex.reps}</TableCell>
-                  <TableCell>{ex.weight}</TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>{ex.sets}</TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>{ex.reps}</TableCell>
+                  <TableCell sx={{ textAlign: "center" }}>
+                    {ex.weight}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

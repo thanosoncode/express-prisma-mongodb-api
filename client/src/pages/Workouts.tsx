@@ -1,5 +1,11 @@
 import DeleteForever from "@mui/icons-material/DeleteForever";
-import { Box, IconButton, SelectChangeEvent, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteWorkout, getWorkouts } from "../api/workouts";
 import { LONG_CACHE } from "../utils/constants";
@@ -10,11 +16,16 @@ import ExercisesList from "../components/ExercisesList";
 import { useState } from "react";
 import FIlterBy from "../components/FIlterBy";
 import PieChart from "../components/charts/PieChart";
+import AddWorkout from "../components/AddWorkout";
+import { makeStyles } from "tss-react/mui";
+import theme from "../theme";
 
 const Workouts = () => {
+  const { classes } = useStyles();
   const queryClient = useQueryClient();
   const [selectedLabel, setSelectedLabel] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [isAddWorkoutOpen, setisAddWorkoutOpen] = useState(false);
 
   const handleLabelChange = (event: SelectChangeEvent<string>) =>
     setSelectedLabel(event.target.value);
@@ -23,6 +34,8 @@ const Workouts = () => {
     setSelectedLabel("");
     setFiltersOpen(!filtersOpen);
   };
+
+  const handleIsAddWorkoutOpen = () => setisAddWorkoutOpen(true);
 
   const { data: workouts, isLoading } = useQuery(["workouts"], getWorkouts, {
     refetchOnWindowFocus: false,
@@ -44,8 +57,9 @@ const Workouts = () => {
 
   return (
     <Box>
-      <Box sx={{ display: "flex", gap: 2 }}>
-        <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2 }}>
+      {isAddWorkoutOpen && <AddWorkout />}
+      <Box className={classes.titleContainer}>
+        <Typography variant="h6" className={classes.title}>
           My workouts
         </Typography>
         <FIlterBy
@@ -54,30 +68,31 @@ const Workouts = () => {
           handleFilterByOpen={handleFilterByOpen}
           handleLabelChange={handleLabelChange}
         />
+        {!isAddWorkoutOpen && (
+          <Button
+            variant="contained"
+            onClick={handleIsAddWorkoutOpen}
+            className={classes.newWorkoutButton}
+          >
+            New Workout
+          </Button>
+        )}
       </Box>
       {isLoading ? <CircularProgress /> : null}
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      <Box className={classes.workoutsContainer}>
         {filteredWorkouts
           ? filteredWorkouts.map((workout: Workout) => {
               const { id, label, exercises } = workout;
               return (
-                <Box key={id} sx={{ maxWidth: 800 }}>
+                <Box key={id} className={classes.workout}>
                   <Box sx={{ display: "flex" }}>
                     <Typography>{label}</Typography>
                     <IconButton onClick={() => (id ? mutate(id) : null)}>
                       <DeleteForever />
                     </IconButton>
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: 12,
-                    }}
-                  >
+                  <Box className={classes.exercisesListContainer}>
                     <ExercisesList exercises={exercises}></ExercisesList>
-                    <PieChart data={workout.exercises} />
                   </Box>
                 </Box>
               );
@@ -94,3 +109,32 @@ const Workouts = () => {
   );
 };
 export default Workouts;
+
+const useStyles = makeStyles()(() => {
+  return {
+    newWorkoutButton: { height: "min-content", marginLeft: "auto" },
+    titleContainer: {
+      display: "flex",
+      justifyContent: "cetner",
+      alignItems: "center",
+      gap: "16px",
+    },
+    title: {
+      margin: theme.spacing(2, 0),
+    },
+    workoutsContainer: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "24px",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    workout: { minWidth: 400 },
+    exercisesListContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "36px",
+    },
+  };
+});

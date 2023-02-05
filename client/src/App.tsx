@@ -11,8 +11,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { Box } from "@mui/material";
 import Workouts from "./pages/Workouts";
-import AddWorkout from "./pages/AddWorkout";
-import Charts from "./pages/Charts";
+import AddWorkout from "./components/AddWorkout";
+import Progression from "./pages/Progression";
 import Error from "./components/Error";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -25,16 +25,15 @@ const App = () => {
       <Route path="/" element={<RootLayout />} errorElement={<Error />}>
         <Route index element={<Home />} errorElement={<Error />} />
         <Route
-          path="/workouts"
+          path="/my-workouts"
           element={<Workouts />}
           errorElement={<Error />}
         />
         <Route
-          path="/add-workout"
-          element={<AddWorkout />}
+          path="/progression"
+          element={<Progression />}
           errorElement={<Error />}
         />
-        <Route path="/charts" element={<Charts />} errorElement={<Error />} />
       </Route>
     )
   );

@@ -3,14 +3,17 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useState } from "react";
+import { makeStyles } from "tss-react/mui";
 import { getWorkouts } from "../api/workouts";
 import BarChart from "../components/charts/BarChart";
 import LineChart from "../components/charts/LineChart";
 import SelectByExercise from "../components/SelectByExercise";
+import theme from "../theme";
 import { LONG_CACHE } from "../utils/constants";
 import { Exercise } from "../utils/models";
 
-const Charts = () => {
+const Progression = () => {
+  const { classes } = useStyles();
   const [selectedExercise, setSelectedExercise] = useState(
     "bulgarian split squats"
   );
@@ -73,12 +76,12 @@ const Charts = () => {
 
   return (
     <Box>
-      <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2 }}>
+      <Typography variant="h6" className={classes.title}>
         Check out how a specific exercise has progressed.
       </Typography>
 
-      <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
-        <Typography variant="subtitle2" sx={{ marginBottom: 2 }}>
+      <Box className={classes.subtitleContainer}>
+        <Typography variant="subtitle2" className={classes.subtitle}>
           Select exercise
         </Typography>
         <SelectByExercise
@@ -87,23 +90,15 @@ const Charts = () => {
           options={options}
         />
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: 4,
-        }}
-      >
+      <Box className={classes.graphsContainer}>
         <Box>
-          <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
+          <Typography variant="subtitle1" className={classes.graphTitle}>
             Volume per exercise
           </Typography>
           <BarChart data={volumePerExercise} />
         </Box>
         <Box>
-          <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
+          <Typography variant="subtitle1" className={classes.graphTitle}>
             Top weight
           </Typography>
           <LineChart data={topWeigtPerExercise} />
@@ -112,4 +107,24 @@ const Charts = () => {
     </Box>
   );
 };
-export default Charts;
+export default Progression;
+
+const useStyles = makeStyles()(() => {
+  return {
+    title: { margin: theme.spacing(2, 0) },
+    subtitleContainer: {
+      display: "flex",
+      gap: "16px",
+      marginBottom: theme.spacing(4),
+    },
+    subtitle: { marginBottom: theme.spacing(2) },
+    graphsContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      gap: 4,
+    },
+    graphTitle: { marginBottom: theme.spacing(2) },
+  };
+});

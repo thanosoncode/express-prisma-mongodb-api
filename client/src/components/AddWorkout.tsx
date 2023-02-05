@@ -3,10 +3,10 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postWorkout } from "../api/workouts";
-import AddExercise from "../components/AddExercise";
-import AddLabel from "../components/AddLabel";
-import Controls from "../components/Controls";
-import ExercisesList from "../components/ExercisesList";
+import AddExercise from "./AddExercise";
+import AddLabel from "./AddLabel";
+import Controls from "./Controls";
+import ExercisesList from "./ExercisesList";
 import { Exercise } from "../utils/models";
 
 const AddWorkout = () => {
@@ -30,7 +30,6 @@ const AddWorkout = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["workouts"] });
-        navigate("/workouts");
       },
     }
   );

@@ -21,9 +21,9 @@ const AddLabel: React.FC<AddLabelProps> = (props) => {
       <Box sx={{ display: "flex", gap: 4 }}>
         {props.labelAdded ? null : (
           <Box sx={{ display: "flex", gap: 2 }}>
-            <Typography variant="h6">Add label to your workout</Typography>
+            <Typography variant="h6">What type of workout is it?</Typography>
             <FormControl sx={{ minWidth: 100 }}>
-              <InputLabel id="label">Label</InputLabel>
+              <InputLabel id="label">Type</InputLabel>
               <Select
                 id="label"
                 label="Age"

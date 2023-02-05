@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { useStyles } from "./Navbar.styles";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { CalendarMonth, FitnessCenter, Insights } from "@mui/icons-material";
 
 const Navbar = () => {
   const { classes, cx } = useStyles();
@@ -15,37 +16,35 @@ const Navbar = () => {
           [classes.active]: pathname === "/",
         })}
       >
-        home
+        <Box className={classes.linkContainer}>
+          <CalendarMonth />
+          calendar
+        </Box>
       </NavLink>
-      <Box className={classes.navbarRight}>
-        <NavLink
-          to="/workouts"
-          className={cx({
-            [classes.link]: true,
-            [classes.active]: pathname === "/workouts",
-          })}
-        >
-          my workouts
-        </NavLink>
-        <NavLink
-          to="/add-workout"
-          className={cx({
-            [classes.link]: true,
-            [classes.active]: pathname === "/add-workout",
-          })}
-        >
-          add workout
-        </NavLink>
-        <NavLink
-          to="/charts"
-          className={cx({
-            [classes.link]: true,
-            [classes.active]: pathname === "/charts",
-          })}
-        >
-          charts
-        </NavLink>
-      </Box>
+      <NavLink
+        to="/my-workouts"
+        className={cx({
+          [classes.link]: true,
+          [classes.active]: pathname === "/my-workouts",
+        })}
+      >
+        <Box className={classes.linkContainer}>
+          <FitnessCenter />
+          workouts
+        </Box>
+      </NavLink>
+      <NavLink
+        to="/progression"
+        className={cx({
+          [classes.link]: true,
+          [classes.active]: pathname === "/progression",
+        })}
+      >
+        <Box className={classes.linkContainer}>
+          <Insights />
+          progression
+        </Box>
+      </NavLink>
     </Box>
   );
 };
