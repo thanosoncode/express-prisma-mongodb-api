@@ -7,8 +7,8 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "npm run build && prisma generate && node dist/src/index.js",
     "build": "npx tsc",
+    "start": "node dist/src/index.js",
     "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/index.ts\""
   },
   "keywords": [],
