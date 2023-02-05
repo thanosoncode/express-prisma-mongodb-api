@@ -88,6 +88,7 @@ const Progression = () => {
           value={selectedExercise}
           onChange={handleSelectChange}
           options={options}
+          showExercisesCount={true}
         />
       </Box>
       <Box className={classes.graphsContainer}>

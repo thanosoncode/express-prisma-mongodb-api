@@ -63,7 +63,11 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
         {inValidExercise ? "All fields are required" : ""}
       </Typography>
       <Box sx={{ display: "flex", gap: 4, marginTop: 2, marginBottom: 3 }}>
-        <SelectByExercise value={exercise.name} onChange={handleSelectChange} />
+        <SelectByExercise
+          value={exercise.name}
+          onChange={handleSelectChange}
+          showExercisesCount={false}
+        />
         <FormControl>
           <InputLabel id="sets">sets</InputLabel>
           <Select

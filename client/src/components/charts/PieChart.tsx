@@ -1,10 +1,4 @@
-import {
-  PieChart as ReChartsPieChart,
-  Pie,
-  Tooltip,
-  Cell,
-  Label,
-} from "recharts";
+import { PieChart as ReChartsPieChart, Pie, Tooltip, Cell } from "recharts";
 import theme from "../../theme";
 import { Exercise } from "../../utils/models";
 
@@ -16,16 +10,22 @@ const PieChart: React.FC<PieChartsProps> = ({ data }) => {
   const totalReps = data.reduce((total, item) => {
     return total + Number(item.reps) * Number(item.sets);
   }, 0);
-  const exercises = data.map((ex) => ({
-    name: ex.name,
-    amount: Math.floor((Number(ex.reps) * Number(ex.sets) * 40) / totalReps),
-  }));
+  const exercises = data
+    .map((ex) => ({
+      name: ex.name,
+      amount: Math.floor((Number(ex.reps) * Number(ex.sets) * 40) / totalReps),
+    }))
+    .sort((a, b) => b.amount - a.amount);
+
+  const amounts = exercises.map((ex) => ex.amount).sort((a, b) => b - a);
 
   const COLORS = [
-    theme.palette.grey[300],
-    theme.palette.grey[400],
-    theme.palette.grey[500],
+    theme.palette.grey[700],
     theme.palette.grey[600],
+    theme.palette.grey[500],
+    theme.palette.grey[400],
+    theme.palette.grey[300],
+    theme.palette.grey[200],
   ];
 
   return (
@@ -43,8 +43,8 @@ const PieChart: React.FC<PieChartsProps> = ({ data }) => {
           entry.name.split(" ")[0]
         }
       >
-        {exercises.map((entry, index) => {
-          return <Cell key={index} fill={COLORS[index % COLORS.length]}></Cell>;
+        {exercises.map((_, index) => {
+          return <Cell key={index} fill={COLORS[index % COLORS.length]} />;
         })}
       </Pie>
       <Tooltip />

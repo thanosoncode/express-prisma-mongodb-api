@@ -57,48 +57,56 @@ const Workouts = () => {
 
   return (
     <Box>
-      {isAddWorkoutOpen && <AddWorkout />}
-      <Box className={classes.titleContainer}>
-        <Typography variant="h6" className={classes.title}>
-          My workouts
-        </Typography>
-        <FIlterBy
-          filtersOpen={filtersOpen}
-          selectedLabel={selectedLabel}
-          handleFilterByOpen={handleFilterByOpen}
-          handleLabelChange={handleLabelChange}
-        />
-        {!isAddWorkoutOpen && (
-          <Button
-            variant="contained"
-            onClick={handleIsAddWorkoutOpen}
-            className={classes.newWorkoutButton}
-          >
-            New Workout
-          </Button>
-        )}
-      </Box>
+      {isAddWorkoutOpen && (
+        <AddWorkout setisAddWorkoutOpen={setisAddWorkoutOpen} />
+      )}
+
       {isLoading ? <CircularProgress /> : null}
-      <Box className={classes.workoutsContainer}>
-        {filteredWorkouts
-          ? filteredWorkouts.map((workout: Workout) => {
-              const { id, label, exercises } = workout;
-              return (
-                <Box key={id} className={classes.workout}>
-                  <Box sx={{ display: "flex" }}>
-                    <Typography>{label}</Typography>
-                    <IconButton onClick={() => (id ? mutate(id) : null)}>
-                      <DeleteForever />
-                    </IconButton>
-                  </Box>
-                  <Box className={classes.exercisesListContainer}>
-                    <ExercisesList exercises={exercises}></ExercisesList>
-                  </Box>
-                </Box>
-              );
-            })
-          : null}
-      </Box>
+      {!isAddWorkoutOpen && (
+        <>
+          <Box className={classes.titleContainer}>
+            <Typography variant="h6" className={classes.title}>
+              My workouts
+            </Typography>
+            <FIlterBy
+              filtersOpen={filtersOpen}
+              selectedLabel={selectedLabel}
+              handleFilterByOpen={handleFilterByOpen}
+              handleLabelChange={handleLabelChange}
+            />
+            {!isAddWorkoutOpen && (
+              <Button
+                variant="contained"
+                onClick={handleIsAddWorkoutOpen}
+                className={classes.newWorkoutButton}
+              >
+                New Workout
+              </Button>
+            )}
+          </Box>
+          <Box className={classes.workoutsContainer}>
+            {filteredWorkouts
+              ? filteredWorkouts.map((workout: Workout) => {
+                  const { id, label, exercises } = workout;
+                  return (
+                    <Box key={id} className={classes.workout}>
+                      <Box sx={{ display: "flex" }}>
+                        <Typography>{label}</Typography>
+                        <IconButton onClick={() => (id ? mutate(id) : null)}>
+                          <DeleteForever />
+                        </IconButton>
+                      </Box>
+                      <Box className={classes.exercisesListContainer}>
+                        <ExercisesList exercises={exercises}></ExercisesList>
+                      </Box>
+                    </Box>
+                  );
+                })
+              : null}
+          </Box>
+        </>
+      )}
+
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isDeleting}
