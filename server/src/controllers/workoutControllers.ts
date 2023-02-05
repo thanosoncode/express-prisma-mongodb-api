@@ -4,7 +4,11 @@ import { Exercise } from "../models/workoutModels";
 import { workoutIsValid } from "../utils/helpers";
 
 const getWorkouts = async (req: Request, res: Response) => {
-  const workouts = await prisma.workout.findMany();
+  const workouts = await prisma.workout.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   if (!workouts) {
     return res.status(400).json({ message: "no workouts" });
   }
