@@ -12,6 +12,7 @@ const RootLayout = () => {
         minHeight: "100vh",
         overflowX: "hidden",
         marginRight: "calc(-1 * (100vw - 100%))",
+        paddingBottom: theme.spacing(8),
       }}
     >
       <Navbar />

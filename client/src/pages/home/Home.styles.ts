@@ -1,4 +1,5 @@
 import { makeStyles } from "tss-react/mui";
+import theme from "../../theme";
 
 export const useStyles = makeStyles()(() => ({
   root: {
@@ -7,7 +8,7 @@ export const useStyles = makeStyles()(() => ({
     alignItems: "center",
     flexDirection: "column",
     gap: "32px",
-    marginTop: 8,
+    margin: theme.spacing(6, 0),
   },
   container: {
     display: "flex",

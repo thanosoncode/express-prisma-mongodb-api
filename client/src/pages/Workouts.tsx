@@ -91,12 +91,6 @@ const Workouts = () => {
                   return (
                     <Box key={id} className={classes.workout}>
                       <Box className={classes.workoutTitle}>
-                        <Typography
-                          variant="h6"
-                          className={classes.workoutLabel}
-                        >
-                          {label}
-                        </Typography>
                         <Typography variant="subtitle2">
                           {workout?.createdAt
                             ? format(
@@ -104,6 +98,12 @@ const Workouts = () => {
                                 "dd/MM/yyyy"
                               )
                             : ""}{" "}
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          className={classes.workoutLabel}
+                        >
+                          {label}
                         </Typography>
                         <IconButton
                           onClick={() => (id ? mutate(id) : null)}

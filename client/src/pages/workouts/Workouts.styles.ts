@@ -9,6 +9,7 @@ export const useStyles = makeStyles()(() => ({
     alignItems: "center",
     gap: "16px",
     padding: theme.spacing(0, 4),
+    margin: theme.spacing(3, 0, 4, 0),
   },
   title: {
     margin: theme.spacing(2, 0),

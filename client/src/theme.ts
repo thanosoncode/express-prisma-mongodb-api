@@ -11,6 +11,15 @@ const theme = createTheme({
       secondaryText: "#b3b3b3",
     },
   },
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          border: "none",
+        },
+      },
+    },
+  },
 });
 
 export default theme;
