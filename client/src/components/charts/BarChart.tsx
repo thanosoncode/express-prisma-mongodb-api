@@ -17,7 +17,7 @@ interface BarChartsProps {
 
 const BarChart: React.FC<BarChartsProps> = ({ data }) => {
   return (
-    <ReChartsBarChart width={640} height={360} data={data}>
+    <ReChartsBarChart width={360} height={280} data={data}>
       <Bar
         dataKey="volume"
         fill={theme.palette.primary.main}

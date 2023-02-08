@@ -4,6 +4,7 @@ import {
   Button,
   IconButton,
   SelectChangeEvent,
+  Theme,
   Typography,
 } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -15,10 +16,9 @@ import Backdrop from "@mui/material/Backdrop";
 import ExercisesList from "../components/ExercisesList";
 import { useState } from "react";
 import FIlterBy from "../components/FIlterBy";
-import PieChart from "../components/charts/PieChart";
 import AddWorkout from "../components/AddWorkout";
 import { makeStyles } from "tss-react/mui";
-import theme from "../theme";
+import { format } from "date-fns";
 
 const Workouts = () => {
   const { classes } = useStyles();
@@ -90,14 +90,33 @@ const Workouts = () => {
                   const { id, label, exercises } = workout;
                   return (
                     <Box key={id} className={classes.workout}>
-                      <Box sx={{ display: "flex" }}>
-                        <Typography>{label}</Typography>
-                        <IconButton onClick={() => (id ? mutate(id) : null)}>
+                      <Box className={classes.workoutTitle}>
+                        <Typography
+                          variant="h6"
+                          className={classes.workoutLabel}
+                        >
+                          {label}
+                        </Typography>
+                        <Typography variant="subtitle2">
+                          {workout?.createdAt
+                            ? format(
+                                new Date(workout?.createdAt).getTime(),
+                                "dd/MM/yyyy"
+                              )
+                            : ""}{" "}
+                        </Typography>
+                        <IconButton
+                          onClick={() => (id ? mutate(id) : null)}
+                          sx={{ padding: 0 }}
+                        >
                           <DeleteForever />
                         </IconButton>
                       </Box>
                       <Box className={classes.exercisesListContainer}>
-                        <ExercisesList exercises={exercises}></ExercisesList>
+                        <ExercisesList
+                          exercises={exercises}
+                          showTitle={false}
+                        ></ExercisesList>
                       </Box>
                     </Box>
                   );
@@ -118,7 +137,7 @@ const Workouts = () => {
 };
 export default Workouts;
 
-const useStyles = makeStyles()(() => {
+const useStyles = makeStyles()((theme: Theme) => {
   return {
     newWorkoutButton: { height: "min-content", marginLeft: "auto" },
     titleContainer: {
@@ -126,18 +145,27 @@ const useStyles = makeStyles()(() => {
       justifyContent: "cetner",
       alignItems: "center",
       gap: "16px",
+      padding: theme.spacing(0, 4),
     },
     title: {
       margin: theme.spacing(2, 0),
     },
     workoutsContainer: {
       display: "flex",
-      flexDirection: "column",
-      gap: "24px",
+      gap: "32px",
       justifyContent: "center",
-      alignItems: "center",
+      alignItems: "flex-start",
+      flexWrap: "wrap",
     },
-    workout: { minWidth: 400 },
+    workout: { width: 380 },
+    workoutTitle: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      gap: "16px",
+      marginBottom: "4px",
+    },
+    workoutLabel: { textTransform: "capitalize" },
     exercisesListContainer: {
       display: "flex",
       justifyContent: "center",

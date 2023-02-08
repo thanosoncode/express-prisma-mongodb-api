@@ -55,14 +55,23 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
   };
 
   return (
-    <>
+    <Box>
       <Typography
         variant="h6"
         sx={{ marginTop: 4, color: theme.palette.warning.main }}
       >
         {inValidExercise ? "All fields are required" : ""}
       </Typography>
-      <Box sx={{ display: "flex", gap: 4, marginTop: 2, marginBottom: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 4,
+          marginTop: 2,
+          marginBottom: 3,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
         <SelectByExercise
           value={exercise.name}
           onChange={handleSelectChange}
@@ -115,7 +124,7 @@ const AddExercise: React.FC<AddExerciseProps> = (props) => {
           add
         </Button>
       </Box>
-    </>
+    </Box>
   );
 };
 export default AddExercise;

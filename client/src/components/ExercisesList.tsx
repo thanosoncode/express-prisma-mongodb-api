@@ -1,4 +1,4 @@
-import { Exercise } from "../utils/models";
+import { Exercise, Workout } from "../utils/models";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,15 +6,35 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { format } from "date-fns";
+import { makeStyles } from "tss-react/mui";
+import { Theme } from "@mui/material";
 
 interface ExercisesListProps {
   exercises: Exercise[];
+  workout?: Workout | null;
+  showTitle: boolean;
 }
 
-const ExercisesList: React.FC<ExercisesListProps> = (props) => {
+const ExercisesList: React.FC<ExercisesListProps> = ({
+  exercises,
+  workout,
+  showTitle,
+}) => {
+  const { classes } = useStyles();
+  console.log(workout?.createdAt);
   return (
     <>
-      {props.exercises && props.exercises.length > 0 ? (
+      {showTitle && (
+        <Typography variant="h6" className={classes.date}>
+          {workout?.createdAt
+            ? format(new Date(workout?.createdAt).getTime(), "dd/MM/yyyy")
+            : ""}{" "}
+          <b>{workout?.label}</b>
+        </Typography>
+      )}
+      {exercises && exercises.length > 0 ? (
         <TableContainer component={Paper} sx={{ height: "min-content" }}>
           <Table size="small">
             <TableHead>
@@ -32,7 +52,7 @@ const ExercisesList: React.FC<ExercisesListProps> = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.exercises.map((ex, index) => (
+              {exercises.map((ex, index) => (
                 <TableRow key={index}>
                   <TableCell>{ex.name}</TableCell>
                   <TableCell sx={{ textAlign: "center" }}>{ex.sets}</TableCell>
@@ -50,3 +70,7 @@ const ExercisesList: React.FC<ExercisesListProps> = (props) => {
   );
 };
 export default ExercisesList;
+
+export const useStyles = makeStyles()((theme: Theme) => ({
+  date: { marginBottom: 8, textAlign: "center" },
+}));

@@ -49,9 +49,9 @@ const Progression = () => {
     return {
       name: ex.name,
       volume: calculateVolume(ex),
-      sets: ex.sets,
-      reps: ex.reps,
-      weight: ex.weight,
+      sets: Number(ex.sets),
+      reps: Number(ex.reps),
+      weight: Number(ex.weight),
       createdAt: ex.createdAt
         ? format(new Date(ex.createdAt).getTime(), "dd/MM")
         : "",
@@ -60,7 +60,7 @@ const Progression = () => {
 
   const topWeigtPerExercise = allRecordsPerExercise.map((ex) => ({
     name: ex.name,
-    topWeight: ex.weight,
+    topWeight: Number(ex.weight),
     createdAt: ex.createdAt
       ? format(new Date(ex.createdAt).getTime(), "dd/MM")
       : "",
@@ -75,13 +75,9 @@ const Progression = () => {
   );
 
   return (
-    <Box>
-      <Typography variant="h6" className={classes.title}>
-        Check out how a specific exercise has progressed.
-      </Typography>
-
-      <Box className={classes.subtitleContainer}>
-        <Typography variant="subtitle2" className={classes.subtitle}>
+    <Box className={classes.root}>
+      <Box className={classes.titleContainer}>
+        <Typography variant="h6" className={classes.title}>
           Select exercise
         </Typography>
         <SelectByExercise
@@ -112,19 +108,24 @@ export default Progression;
 
 const useStyles = makeStyles()(() => {
   return {
-    title: { margin: theme.spacing(2, 0) },
-    subtitleContainer: {
-      display: "flex",
-      gap: "16px",
-      marginBottom: theme.spacing(4),
-    },
-    subtitle: { marginBottom: theme.spacing(2) },
-    graphsContainer: {
+    root: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "column",
-      gap: 4,
+    },
+    titleContainer: {
+      display: "flex",
+      gap: "16px",
+      margin: theme.spacing(6, 0, 10, 0),
+    },
+    title: { marginBottom: theme.spacing(2) },
+    graphsContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexWrap: "wrap",
+      gap: "36px",
     },
     graphTitle: { marginBottom: theme.spacing(2) },
   };

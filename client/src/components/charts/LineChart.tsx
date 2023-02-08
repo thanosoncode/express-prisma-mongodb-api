@@ -18,7 +18,7 @@ interface BarChartsProps {
 
 const LineChart: React.FC<BarChartsProps> = ({ data }) => {
   return (
-    <ReChartsLineChart width={640} height={360} data={data}>
+    <ReChartsLineChart width={360} height={280} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <Line
         type="monotone"

@@ -47,7 +47,9 @@ const AddWorkout: React.FC<AddWorkoutProps> = ({ setisAddWorkoutOpen }) => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <Typography variant="h6" sx={{ marginTop: 2 }}>
         Add workout
       </Typography>

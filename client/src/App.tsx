@@ -11,7 +11,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { Box } from "@mui/material";
 import Workouts from "./pages/Workouts";
-import AddWorkout from "./components/AddWorkout";
 import Progression from "./pages/Progression";
 import Error from "./components/Error";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -42,17 +41,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box
-          style={{
-            background: "#fafafa",
-            color: "black",
-            minHeight: "100vh",
-            overflowX: "hidden",
-            marginRight: "calc(-1 * (100vw - 100%))",
-          }}
-        >
-          <RouterProvider router={router} />
-        </Box>
+        <RouterProvider router={router} />
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
     </QueryClientProvider>

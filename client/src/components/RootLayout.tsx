@@ -7,11 +7,17 @@ const RootLayout = () => {
   return (
     <Box
       sx={{
-        padding: theme.spacing(0, 12, 4, 12),
+        background: "#fafafa",
+        color: "black",
+        minHeight: "100vh",
+        overflowX: "hidden",
+        marginRight: "calc(-1 * (100vw - 100%))",
       }}
     >
       <Navbar />
-      <Outlet />
+      <Box sx={{ maxWidth: 1000, margin: "0 auto" }}>
+        <Outlet />
+      </Box>
     </Box>
   );
 };

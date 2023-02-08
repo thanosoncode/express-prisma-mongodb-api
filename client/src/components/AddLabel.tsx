@@ -20,7 +20,7 @@ const AddLabel: React.FC<AddLabelProps> = (props) => {
     <Box sx={{ marginTop: 4, marginBottom: 4 }}>
       <Box sx={{ display: "flex", gap: 4 }}>
         {props.labelAdded ? null : (
-          <Box sx={{ display: "flex", gap: 2 }}>
+          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
             <Typography variant="h6">What type of workout is it?</Typography>
             <FormControl sx={{ minWidth: 100 }}>
               <InputLabel id="label">Type</InputLabel>
