@@ -2,13 +2,14 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { workoutLabels } from "../utils/constants";
+import { workoutLabels } from "../../utils/constants";
 import { Tune } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import theme from "../theme";
+import theme from "../../theme";
 import { useQueryClient } from "@tanstack/react-query";
-import { Workout } from "../utils/models";
+import { Workout } from "../../utils/models";
 import { makeStyles } from "tss-react/mui";
+import { useStyles } from "./FilterBy.styles";
 
 interface FilterByProps {
   filtersOpen: boolean;
@@ -74,24 +75,3 @@ const FIlterBy: React.FC<FilterByProps> = ({
   );
 };
 export default FIlterBy;
-
-const useStyles = makeStyles()(() => {
-  return {
-    menuItem: {
-      display: "flex",
-      justifyContent: "space-between",
-      gap: "16px",
-    },
-    amount: {
-      width: 20,
-      height: 20,
-      backgroundColor: theme.palette.primary.main,
-      borderRadius: "50%",
-      color: "white",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontSize: 14,
-    },
-  };
-});

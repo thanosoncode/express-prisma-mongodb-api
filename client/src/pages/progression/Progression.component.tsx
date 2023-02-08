@@ -3,14 +3,13 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { useState } from "react";
-import { makeStyles } from "tss-react/mui";
-import { getWorkouts } from "../api/workouts";
-import BarChart from "../components/charts/BarChart";
-import LineChart from "../components/charts/LineChart";
-import SelectByExercise from "../components/SelectByExercise";
-import theme from "../theme";
-import { LONG_CACHE } from "../utils/constants";
-import { Exercise } from "../utils/models";
+import { getWorkouts } from "../../api/workouts";
+import BarChart from "../../components/charts/BarChart";
+import LineChart from "../../components/charts/LineChart";
+import SelectByExercise from "../../components/SelectByExercise";
+import { LONG_CACHE } from "../../utils/constants";
+import { Exercise } from "../../utils/models";
+import { useStyles } from "./Progression.styles";
 
 const Progression = () => {
   const { classes } = useStyles();
@@ -105,28 +104,3 @@ const Progression = () => {
   );
 };
 export default Progression;
-
-const useStyles = makeStyles()(() => {
-  return {
-    root: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-    },
-    titleContainer: {
-      display: "flex",
-      gap: "16px",
-      margin: theme.spacing(6, 0, 10, 0),
-    },
-    title: { marginBottom: theme.spacing(2) },
-    graphsContainer: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexWrap: "wrap",
-      gap: "36px",
-    },
-    graphTitle: { marginBottom: theme.spacing(2) },
-  };
-});

@@ -13,12 +13,12 @@ import { LONG_CACHE } from "../utils/constants";
 import { Workout } from "../utils/models";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
-import ExercisesList from "../components/ExercisesList";
+import ExercisesList from "../components/exerciseList/ExercisesList.component";
 import { useState } from "react";
-import FIlterBy from "../components/FIlterBy";
-import AddWorkout from "../components/AddWorkout";
-import { makeStyles } from "tss-react/mui";
+import FIlterBy from "../components/filterBy/FIlterBy.component";
+import AddWorkout from "../components/addWorkout/AddWorkout.component";
 import { format } from "date-fns";
+import { useStyles } from "./workouts/Workouts.styles";
 
 const Workouts = () => {
   const { classes } = useStyles();
@@ -136,41 +136,3 @@ const Workouts = () => {
   );
 };
 export default Workouts;
-
-const useStyles = makeStyles()((theme: Theme) => {
-  return {
-    newWorkoutButton: { height: "min-content", marginLeft: "auto" },
-    titleContainer: {
-      display: "flex",
-      justifyContent: "cetner",
-      alignItems: "center",
-      gap: "16px",
-      padding: theme.spacing(0, 4),
-    },
-    title: {
-      margin: theme.spacing(2, 0),
-    },
-    workoutsContainer: {
-      display: "flex",
-      gap: "32px",
-      justifyContent: "center",
-      alignItems: "flex-start",
-      flexWrap: "wrap",
-    },
-    workout: { width: 380 },
-    workoutTitle: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      gap: "16px",
-      marginBottom: "4px",
-    },
-    workoutLabel: { textTransform: "capitalize" },
-    exercisesListContainer: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: "36px",
-    },
-  };
-});

@@ -1,6 +1,6 @@
 import { Box, Button, SelectChangeEvent, Typography } from "@mui/material";
 import { UseMutateFunction } from "@tanstack/react-query";
-import { Exercise } from "../utils/models";
+import { Exercise } from "../../utils/models";
 
 interface ControlsProps {
   doneWithExercises: boolean;

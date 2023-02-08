@@ -1,12 +1,12 @@
 import { Box, SelectChangeEvent, Typography } from "@mui/material";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { postWorkout } from "../api/workouts";
-import AddExercise from "./AddExercise";
-import AddLabel from "./AddLabel";
-import Controls from "./Controls";
-import ExercisesList from "./ExercisesList";
-import { Exercise } from "../utils/models";
+import { postWorkout } from "../../api/workouts";
+import AddExercise from "../addExercise/AddExercise.component";
+import AddLabel from "../addLabel/AddLabel.component";
+import Controls from "../controls/Controls.component";
+import ExercisesList from "../exerciseList/ExercisesList.component";
+import { Exercise } from "../../utils/models";
 
 interface AddWorkoutProps {
   setisAddWorkoutOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -53,7 +53,7 @@ const AddWorkout: React.FC<AddWorkoutProps> = ({ setisAddWorkoutOpen }) => {
       <Typography variant="h6" sx={{ marginTop: 2 }}>
         Add workout
       </Typography>
-      <ExercisesList exercises={exercises} />
+      <ExercisesList exercises={exercises} showTitle={false} />
       {labelAdded ? (
         <Typography sx={{ marginTop: 4 }} variant="h5">
           {label.toUpperCase()}

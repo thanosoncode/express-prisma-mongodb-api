@@ -6,10 +6,9 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
-import { makeStyles } from "tss-react/mui";
-import theme from "../theme";
 import { possibleExercises } from "../utils/constants";
 import { Exercise } from "../utils/models";
+import { useStyles } from "./selectByExercise/SelectByExercise.styles";
 
 interface SelectByExerciseProps {
   onChange: (event: SelectChangeEvent) => void;
@@ -70,24 +69,3 @@ const SelectByExercise: React.FC<SelectByExerciseProps> = ({
   );
 };
 export default SelectByExercise;
-
-const useStyles = makeStyles()(() => {
-  return {
-    menuItem: {
-      display: "flex",
-      justifyContent: "space-between",
-      gap: "16px",
-    },
-    count: {
-      width: 20,
-      height: 20,
-      backgroundColor: theme.palette.primary.main,
-      borderRadius: "50%",
-      color: "white",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontSize: 14,
-    },
-  };
-});

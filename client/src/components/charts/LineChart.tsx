@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import {
-  Bar,
   LineChart as ReChartsLineChart,
   Legend,
   Tooltip,
@@ -10,7 +9,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import theme from "../../theme";
-import LineChartTooltip from "./LineChartTooltip";
+import LineChartTooltip from "./lineChartTooltip/LineChartTooltip.component";
 
 interface BarChartsProps {
   data: any[];

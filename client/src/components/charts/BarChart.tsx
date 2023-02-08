@@ -9,7 +9,7 @@ import {
   YAxis,
 } from "recharts";
 import theme from "../../theme";
-import BarTooltip from "./BarChartTooltip";
+import BarTooltip from "./barChartTooltip/BarChartTooltip.component";
 
 interface BarChartsProps {
   data: any[];

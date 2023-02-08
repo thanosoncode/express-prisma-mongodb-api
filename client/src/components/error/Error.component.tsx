@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { useRouteError } from "react-router-dom";
-import theme from "../theme";
-import Navbar from "./navbar/Navbar.component";
+import theme from "../../theme";
+import Navbar from "../navbar/Navbar.component";
 
 const Error = () => {
   const error: any = useRouteError();

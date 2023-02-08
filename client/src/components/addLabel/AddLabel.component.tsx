@@ -5,7 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { workoutLabels } from "../utils/constants";
+import { workoutLabels } from "../../utils/constants";
 
 interface AddLabelProps {
   label: string;
@@ -38,7 +38,11 @@ const AddLabel: React.FC<AddLabelProps> = (props) => {
                 ))}
               </Select>
             </FormControl>
-            <Button variant="contained" onClick={props.onAdd}>
+            <Button
+              variant="contained"
+              onClick={props.onAdd}
+              disabled={!props.label}
+            >
               add
             </Button>
           </Box>

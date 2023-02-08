@@ -17,16 +17,7 @@ const PieChart: React.FC<PieChartsProps> = ({ data }) => {
     }))
     .sort((a, b) => b.amount - a.amount);
 
-  const amounts = exercises.map((ex) => ex.amount).sort((a, b) => b - a);
-
-  const COLORS = [
-    theme.palette.grey[700],
-    theme.palette.grey[600],
-    theme.palette.grey[500],
-    theme.palette.grey[400],
-    theme.palette.grey[300],
-    theme.palette.grey[200],
-  ];
+  const COLORS = ["#1976d2", "#4791db", "#75ade4", "#8cbbe9"];
 
   return (
     <ReChartsPieChart

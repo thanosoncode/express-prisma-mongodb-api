@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import theme from "../../theme";
+import theme from "../../../theme";
+import { useStyles } from "./BarChartTooltip.styles";
 
 const BarTooltip = ({
   active,
@@ -8,24 +9,12 @@ const BarTooltip = ({
   payload?: any;
   active?: boolean;
 }) => {
+  const { classes } = useStyles();
+
   if (active && payload) {
     return (
-      <Box
-        sx={{
-          border: `1px solid ${theme.palette.grey[500]}`,
-          borderRadius: "5px",
-          padding: theme.spacing(0.5, 3),
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            backgroundColor: "white",
-          }}
-        >
+      <Box className={classes.container}>
+        <Box className={classes.inner}>
           <Typography variant="h6">
             {payload[0].payload.sets} sets
             {" x "}
