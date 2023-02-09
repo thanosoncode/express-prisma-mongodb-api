@@ -1,15 +1,20 @@
 import { ExpandMore, NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { Box, IconButton, Paper } from "@mui/material";
 import { useState } from "react";
+import { Workout } from "../../utils/models";
 import { useStyles } from "./Calendar.styles";
 import DaysView from "./daysView/DaysView.component";
 import YearsView from "./yearsView/YearsView.component";
 
 interface CalendarProps {
+  workouts: Workout[] | undefined;
   setSelectedWorkoutId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Calendar: React.FC<CalendarProps> = ({ setSelectedWorkoutId }) => {
+const Calendar: React.FC<CalendarProps> = ({
+  setSelectedWorkoutId,
+  workouts,
+}) => {
   const { classes } = useStyles();
   const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
@@ -97,6 +102,7 @@ const Calendar: React.FC<CalendarProps> = ({ setSelectedWorkoutId }) => {
         <DaysView
           month={month}
           year={year}
+          workouts={workouts}
           setSelectedWorkoutId={setSelectedWorkoutId}
         />
       )}

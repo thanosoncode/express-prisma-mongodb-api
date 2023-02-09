@@ -8,17 +8,17 @@ import {
   Typography,
 } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteWorkout, getWorkouts } from "../api/workouts";
-import { LONG_CACHE } from "../utils/constants";
-import { Workout } from "../utils/models";
+import { deleteWorkout, getWorkouts } from "../../api/workouts";
+import { LONG_CACHE } from "../../utils/constants";
+import { Workout } from "../../utils/models";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
-import ExercisesList from "../components/exerciseList/ExercisesList.component";
+import ExercisesList from "../../components/exerciseList/ExercisesList.component";
 import { useState } from "react";
-import FIlterBy from "../components/filterBy/FIlterBy.component";
-import AddWorkout from "../components/addWorkout/AddWorkout.component";
+import FIlterBy from "../../components/filterBy/FIlterBy.component";
+import AddWorkout from "../../components/addWorkout/AddWorkout.component";
 import { format } from "date-fns";
-import { useStyles } from "./workouts/Workouts.styles";
+import { useStyles } from "./Workouts.styles";
 
 const Workouts = () => {
   const { classes } = useStyles();
@@ -61,7 +61,6 @@ const Workouts = () => {
         <AddWorkout setisAddWorkoutOpen={setisAddWorkoutOpen} />
       )}
 
-      {isLoading ? <CircularProgress /> : null}
       {!isAddWorkoutOpen && (
         <>
           <Box className={classes.titleContainer}>
@@ -85,6 +84,7 @@ const Workouts = () => {
             )}
           </Box>
           <Box className={classes.workoutsContainer}>
+            {isLoading && <CircularProgress />}
             {filteredWorkouts
               ? filteredWorkouts.map((workout: Workout) => {
                   const { id, label, exercises } = workout;
@@ -116,7 +116,7 @@ const Workouts = () => {
                         <ExercisesList
                           exercises={exercises}
                           showTitle={false}
-                        ></ExercisesList>
+                        />
                       </Box>
                     </Box>
                   );

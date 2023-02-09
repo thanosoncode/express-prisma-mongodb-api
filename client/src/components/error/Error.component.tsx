@@ -1,7 +1,7 @@
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useRouteError } from "react-router-dom";
 import theme from "../../theme";
-import Navbar from "../navbar/Navbar.component";
 
 const Error = () => {
   const error: any = useRouteError();
@@ -9,12 +9,16 @@ const Error = () => {
     <Box
       sx={{
         padding: theme.spacing(0, 12),
+        marginTop: theme.spacing(12),
+        textAlign: "center",
       }}
     >
-      <Navbar />
-      <p>
+      <Typography variant="h6">
+        Something went terribly wrong. Try again later.
+      </Typography>
+      <Typography variant="subtitle1">
         {error.status} {error.statusText}
-      </p>
+      </Typography>
     </Box>
   );
 };

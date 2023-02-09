@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
 import { possibleExercises } from "../utils/constants";
-import { Exercise } from "../utils/models";
+import { Exercise, Workout } from "../utils/models";
 import { useStyles } from "./selectByExercise/SelectByExercise.styles";
 
 interface SelectByExerciseProps {
@@ -25,8 +25,7 @@ const SelectByExercise: React.FC<SelectByExerciseProps> = ({
 }) => {
   const { classes } = useStyles();
   const queryClient = useQueryClient();
-  //@ts-ignore
-  const workouts: Workout[] = queryClient.getQueriesData(["workouts"])[0][1];
+  const workouts = queryClient.getQueryData(["workouts"]) as Workout[];
 
   const allExercises =
     workouts && (workouts.flatMap((w) => w.exercises) as Exercise[]);

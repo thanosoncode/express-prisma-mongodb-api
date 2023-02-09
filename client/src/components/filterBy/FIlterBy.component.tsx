@@ -26,8 +26,7 @@ const FIlterBy: React.FC<FilterByProps> = ({
 }) => {
   const { classes } = useStyles();
   const queryClient = useQueryClient();
-  //@ts-ignore
-  const workouts: Workout[] = queryClient.getQueriesData(["workouts"])[0][1];
+  const workouts = queryClient.getQueryData(["workouts"]) as Workout[];
 
   const timesPerWorkout =
     workouts &&

@@ -10,7 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { Box } from "@mui/material";
-import Workouts from "./pages/Workouts";
+import Workouts from "./pages/workouts/Workouts.component";
 import Progression from "./pages/progression/Progression.component";
 import Error from "./components/error/Error.component";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

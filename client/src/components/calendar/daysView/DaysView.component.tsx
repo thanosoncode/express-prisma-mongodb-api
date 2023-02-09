@@ -5,17 +5,20 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { getWorkouts } from "../../../api/workouts";
 import { LONG_CACHE } from "../../../utils/constants";
+import { Workout } from "../../../utils/models";
 import { useStyles } from "./DaysView.styles";
 
 interface DaysViewProps {
   year: number;
   month: number;
+  workouts: Workout[] | undefined;
   setSelectedWorkoutId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const DaysView: React.FC<DaysViewProps> = ({
   year,
   month,
+  workouts,
   setSelectedWorkoutId,
 }) => {
   const { classes, cx } = useStyles();
@@ -26,11 +29,6 @@ const DaysView: React.FC<DaysViewProps> = ({
   const [days, setDays] = useState<{ id: string; day: string; label: "" }[]>(
     new Array(getDaysInMonth(year, month)).fill({ id: "", day: "", label: "" })
   );
-
-  const { data: workouts, isLoading } = useQuery(["workouts"], getWorkouts, {
-    refetchOnWindowFocus: false,
-    staleTime: LONG_CACHE,
-  });
 
   const handleDayClick = (id: string) => {
     setSelectedWorkoutId(id);
@@ -89,8 +87,6 @@ const DaysView: React.FC<DaysViewProps> = ({
         return 0;
     }
   };
-
-  if (isLoading) return <CircularProgress />;
 
   return (
     <Box className={classes.days}>

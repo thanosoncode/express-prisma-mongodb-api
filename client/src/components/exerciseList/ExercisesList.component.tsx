@@ -23,7 +23,6 @@ const ExercisesList: React.FC<ExercisesListProps> = ({
   showTitle,
 }) => {
   const { classes } = useStyles();
-  console.log(workout?.createdAt);
   return (
     <>
       {showTitle && (
