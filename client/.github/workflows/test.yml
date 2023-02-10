@@ -1,7 +1,5 @@
 name: testing
 on: push
-  branches:
-    - master
   paths:
     - client/**
 jobs:
