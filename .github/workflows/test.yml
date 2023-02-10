@@ -1,6 +1,6 @@
 name: testing
 on: push
-  paths:
+  path:
     - client
 jobs:
   test:
