@@ -7,8 +7,6 @@ const RootLayout = () => {
   return (
     <Box
       sx={{
-        background: "#fafafa",
-        color: "black",
         minHeight: "100vh",
         overflowX: "hidden",
         marginRight: "calc(-1 * (100vw - 100%))",
@@ -16,7 +14,7 @@ const RootLayout = () => {
       }}
     >
       <Navbar />
-      <Box sx={{ maxWidth: 1000, margin: "0 auto" }}>
+      <Box sx={{ maxWidth: 792, margin: "0 auto" }}>
         <Outlet />
       </Box>
     </Box>

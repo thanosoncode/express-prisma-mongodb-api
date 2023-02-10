@@ -12,6 +12,5 @@ export const useStyles = makeStyles()(() => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    backgroundColor: "white",
   },
 }));

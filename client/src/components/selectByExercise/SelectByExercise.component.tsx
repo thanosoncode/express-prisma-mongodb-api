@@ -6,9 +6,9 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
-import { possibleExercises } from "../utils/constants";
-import { Exercise, Workout } from "../utils/models";
-import { useStyles } from "./selectByExercise/SelectByExercise.styles";
+import { possibleExercises } from "../../utils/constants";
+import { Exercise, Workout } from "../../utils/models";
+import { useStyles } from "./SelectByExercise.styles";
 
 interface SelectByExerciseProps {
   onChange: (event: SelectChangeEvent) => void;

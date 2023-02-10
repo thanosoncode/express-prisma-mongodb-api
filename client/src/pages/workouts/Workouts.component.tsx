@@ -19,6 +19,7 @@ import FIlterBy from "../../components/filterBy/FIlterBy.component";
 import AddWorkout from "../../components/addWorkout/AddWorkout.component";
 import { format } from "date-fns";
 import { useStyles } from "./Workouts.styles";
+import theme from "../../theme";
 
 const Workouts = () => {
   const { classes } = useStyles();
@@ -42,7 +43,7 @@ const Workouts = () => {
     staleTime: LONG_CACHE,
   });
 
-  const { mutate, isLoading: isDeleting } = useMutation(
+  const { mutate: deleteSelectedWorkout, isLoading: isDeleting } = useMutation(
     ["delete-workout"],
     deleteWorkout,
     {
@@ -64,9 +65,6 @@ const Workouts = () => {
       {!isAddWorkoutOpen && (
         <>
           <Box className={classes.titleContainer}>
-            <Typography variant="h6" className={classes.title}>
-              My workouts
-            </Typography>
             <FIlterBy
               filtersOpen={filtersOpen}
               selectedLabel={selectedLabel}
@@ -91,7 +89,10 @@ const Workouts = () => {
                   return (
                     <Box key={id} className={classes.workout}>
                       <Box className={classes.workoutTitle}>
-                        <Typography variant="subtitle2">
+                        <Typography
+                          variant="subtitle2"
+                          sx={{ paddingLeft: theme.spacing(1) }}
+                        >
                           {workout?.createdAt
                             ? format(
                                 new Date(workout?.createdAt).getTime(),
@@ -106,10 +107,12 @@ const Workouts = () => {
                           {label}
                         </Typography>
                         <IconButton
-                          onClick={() => (id ? mutate(id) : null)}
+                          onClick={() =>
+                            id ? deleteSelectedWorkout(id) : null
+                          }
                           sx={{ padding: 0 }}
                         >
-                          <DeleteForever />
+                          <DeleteForever sx={{ fontSize: 16 }} />
                         </IconButton>
                       </Box>
                       <Box className={classes.exercisesListContainer}>

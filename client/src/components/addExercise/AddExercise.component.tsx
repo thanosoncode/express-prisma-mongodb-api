@@ -8,7 +8,7 @@ import { Exercise } from "../../utils/models";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import theme from "../../theme";
-import SelectByExercise from "../SelectByExercise";
+import SelectByExercise from "../selectByExercise/SelectByExercise.component";
 import { Typography } from "@mui/material";
 
 interface AddExerciseProps {
