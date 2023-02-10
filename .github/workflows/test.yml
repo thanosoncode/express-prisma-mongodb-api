@@ -1,7 +1,7 @@
 name: testing
 on: push
   paths:
-    - client/**
+    - client
 jobs:
   test:
     runs-on: ubuntu-latest
